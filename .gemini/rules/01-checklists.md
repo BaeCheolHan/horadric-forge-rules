@@ -20,19 +20,19 @@
 - [ ] [MUST] **Intent 고정**: 목표/제약/금지를 1~2줄로 재진술
 - [ ] [MUST] **진행 의도 확인**: 변경 의사 + 타겟 repo 지정 (`03-gate.md` 3단계 게이트 참조)
 - [ ] [MUST] **최종 승인**: 스케일 고지 + 사용자 "approve execute" (또는 명시적 승인) 확인
-- [ ] [MUST] **Local Search 우선**: 파일 탐색 전 local-search 먼저 (토큰 절감)
+- [ ] [MUST] **Deckard 우선**: 파일 탐색 전 deckard 먼저 (토큰 절감)
 - [ ] [IF] **위험 행동 재확인**: 파괴/외부/대규모면 1회 재확인 완료
 - [ ] [IF] **Knowledge 확인**:
   - S0: `current-state.md` ≤6줄만 (lessons/debt 자동 읽기 금지)
   - S1+: lessons ≤10줄, debt ≤20줄, state ≤12줄
-  - **S1+ 설계 시**: local-search로 관련 API/ERD/glossary 검색 (버그 방지)
+  - **S1+ 설계 시**: deckard로 관련 API/ERD/glossary 검색 (버그 방지)
 
 **Preflight 체크 예시**:
 ```
 ✓ Intent: PaymentService null 체크 추가, 3 files 이내
 ✓ 진행 의도: "approve execute" 확인
 ✓ 최종 승인: S0 (3 files) 승인됨
-✓ Local Search: local-search "PaymentService" → 3개 파일
+✓ Deckard: deckard "PaymentService" → 3개 파일
 ✓ Knowledge: current-state 6줄 읽음
 ```
 
@@ -72,6 +72,7 @@
 
 > [!CAUTION]
 > **S1+ 규모에서 문서 미작성 시 작업 미완료 처리**
+> 모든 문서는 **한국어**로 작성합니다 (코드 식별자 제외).
 
 **변경 유형 선언** [MUST]: Code / API / Data / Enum-Status / Process
 

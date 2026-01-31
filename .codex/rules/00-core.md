@@ -66,27 +66,27 @@
 ## MSA 타겟팅 (P0)
 - repo/service 미지정이면 **Change/Read Expand 금지**
 - 후보 2~3개 제시 → 사용자 선택 → Active scope 고정
-- **후보 제시 순서**: (1) local-search `/repo-candidates` (2) 1depth+README
+- **후보 제시 순서**: (1) deckard `/repo-candidates` (2) 1depth+README
 
-## Local Search 우선 원칙 (P2: 토큰 절감)
+## Deckard 우선 원칙 (P2: 토큰 절감)
 
 **목적**: 불필요한 파일 탐색을 방지하여 토큰 30-50% 절감
 
 ### MCP 도구 사용 (v2.3.0+)
-local-search가 MCP 도구로 등록되어 있다면 (`/mcp`로 확인):
+deckard가 MCP 도구로 등록되어 있다면 (`/mcp`로 확인):
 1. **search**: 키워드로 파일/코드 검색
 2. **status**: 인덱스 상태 확인
 
-MCP 미등록 시: `python3 .codex/tools/local-search/scripts/query.py search "keyword"`
+MCP 미등록 시: `python3 .codex/tools/deckard/scripts/query.py search "keyword"`
 
 ### 필수 사용 시나리오
 
 | 상황 | 필수 행동 | 금지 |
 |------|-----------|------|
-| 파일 위치 모름 | local-search `search` 먼저 | Glob 전체 탐색 |
-| 키워드 검색 | local-search > grep | 추측 경로 접근 |
-| Cross-repo 탐색 | local-search로 전체 검색 | 수동 탐색 |
-| **지식 문서 조회** | local-search로 검색 (lessons/glossary/API/ERD) | 직접 경로 접근 |
+| 파일 위치 모름 | deckard `search` 먼저 | Glob 전체 탐색 |
+| 키워드 검색 | deckard > grep | 추측 경로 접근 |
+| Cross-repo 탐색 | deckard로 전체 검색 | 수동 탐색 |
+| **지식 문서 조회** | deckard로 검색 (lessons/glossary/API/ERD) | 직접 경로 접근 |
 
 ### 예시: Before vs After
 
@@ -99,12 +99,12 @@ AI: Glob **/*auth* → 20개 파일 읽기 → 12000 토큰
 **After (토큰 절감)**:
 ```
 User: "로그인 코드 찾아줘"
-AI: local-search "login auth" → 3개 파일 → 900 토큰 (92% 절감)
+AI: deckard "login auth" → 3개 파일 → 900 토큰 (92% 절감)
 ```
 
 ### 예외 허용
-- local-search 결과 0건 → Glob 허용
-- local-search 서버 미응답 → grep 허용 (에러 로그 명시)
+- deckard 결과 0건 → Glob 허용
+- deckard 서버 미응답 → grep 허용 (에러 로그 명시)
 
 ## 게이트 & 워크플로우
 

@@ -1,4 +1,4 @@
-# Local Search (포인터)
+# Deckard (포인터)
 
 > 정본: `.codex/tools/deckard/README.md`
 

@@ -12,12 +12,12 @@
 - [ ] [MUST] **Intent 고정**: 목표/제약/금지를 1~2줄로 재진술
 - [ ] [MUST] **진행 의도 확인**: 변경 의사 + 타겟 repo 지정 (`03-gate.md` 3단계 게이트 참조)
 - [ ] [MUST] **최종 승인**: 스케일 고지 + 사용자 "approve execute" (또는 명시적 승인) 확인
-- [ ] [MUST] **Local Search 우선**: 파일 탐색 전 local-search 먼저 (토큰 절감)
+- [ ] [MUST] **Deckard 우선**: 파일 탐색 전 deckard 먼저 (토큰 절감)
 - [ ] [IF] **위험 행동 재확인**: 파괴/외부/대규모면 1회 재확인 완료
 - [ ] [IF] **Knowledge 확인**:
   - S0: `current-state.md` ≤6줄만 (lessons/debt 자동 읽기 금지)
   - S1+: lessons ≤10줄, debt ≤20줄, state ≤12줄
-  - **S1+ 설계 시**: local-search로 관련 API/ERD/glossary 검색 (버그 방지)
+  - **S1+ 설계 시**: deckard로 관련 API/ERD/glossary 검색 (버그 방지)
 
 ---
 

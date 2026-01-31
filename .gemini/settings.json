@@ -17,10 +17,10 @@
     }
   },
   "mcpServers": {
-    "local-search": {
+    "deckard": {
       "command": "python3",
       "args": [
-        ".codex/tools/local-search/mcp/server.py"
+        ".codex/tools/deckard/mcp/server.py"
       ],
       "timeout": 30000,
       "trust": true

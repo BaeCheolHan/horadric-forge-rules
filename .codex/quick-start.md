@@ -15,7 +15,7 @@ cd codex-rules-v2.4.3-workspace-msa
 ./install.sh ~/Documents/repositories  # 또는 ~/documents/repositories
 source ~/.zshrc  # 또는 ~/.bash_profile
 
-# 완료! codex-cli가 local-search MCP 도구를 자동으로 로드합니다.
+# 완료! codex-cli가 deckard MCP 도구를 자동으로 로드합니다.
 ```
 
 ```bash
@@ -54,7 +54,7 @@ curl -fsSL https://raw.githubusercontent.com/BaeCheolHan/codex-forge/main/instal
 ```
 1. codex-cli는 workspace root에서 실행
 2. "payment-service 버그 고쳐줘" → 해당 repo만 Active scope
-3. "결제 관련 코드 찾아줘" → local-search가 전체 repo 검색 → 후보 제시
+3. "결제 관련 코드 찾아줘" → deckard가 전체 repo 검색 → 후보 제시
 4. repo 미지정 요청 → Change 금지, 후보 2~3개 제시 후 선택
 ```
 
@@ -93,7 +93,7 @@ codex "안녕"
 
 # 4. MCP 도구 확인 (TUI에서)
 /mcp
-# local-search 도구가 보여야 함: search, status, repo_candidates
+# deckard 도구가 보여야 함: search, status, repo_candidates
 ```
 
 ### 실패 시 진단
@@ -105,19 +105,19 @@ codex "안녕"
 # 문제: AGENTS.md를 찾을 수 없음
 → 해결: 룰셋 zip을 workspace root에 압축 해제
 
-# 문제: MCP local-search 도구 안 보임
+# 문제: MCP deckard 도구 안 보임
 → 해결: .codex/config.toml 확인, 프로젝트 신뢰 설정 확인
 
 # 문제: MCP 서버 오류
-→ 폴백: python3 .codex/tools/local-search/app/main.py &
-→ 확인: python3 .codex/tools/local-search/scripts/query.py status
+→ 폴백: python3 .codex/tools/deckard/app/main.py &
+→ 확인: python3 .codex/tools/deckard/scripts/query.py status
 ```
 
 ### 완료 조건 (DoD)
 
 - [ ] `.codex-root` 파일 존재
 - [ ] `.codex/rules/00-core.md` 읽기 가능
-- [ ] `/mcp` 명령으로 local-search 도구 확인
+- [ ] `/mcp` 명령으로 deckard 도구 확인
 
 ---
 
@@ -137,13 +137,13 @@ codex "안녕"
 
 ---
 
-## 2. 토큰 절감: Local Search 우선
+## 2. 토큰 절감: Deckard 우선
 
-파일 탐색 전 **반드시** local-search 먼저!
+파일 탐색 전 **반드시** deckard 먼저!
 
 | Before (토큰 낭비) | After (토큰 절감) |
 |-------------------|------------------|
-| Glob 전체 탐색 → 20개 파일 → 12000 토큰 | local-search → 3개 파일 → 900 토큰 |
+| Glob 전체 탐색 → 20개 파일 → 12000 토큰 | deckard → 3개 파일 → 900 토큰 |
 
 **MCP 도구 사용**:
 - `search`: 키워드로 파일/코드 검색
@@ -155,7 +155,7 @@ codex "안녕"
 
 **인덱싱 확인**:
 파일이 검색되지 않으면 `list_files path_pattern="filename"`으로 인덱스 포함 여부를 확인하세요.
-자세한 내용: `.codex/rules/00-core.md` > "Local Search 우선 원칙"
+자세한 내용: `.codex/rules/00-core.md` > "Deckard 우선 원칙"
 
 ---
 
@@ -212,7 +212,7 @@ multi-repo 환경에서는:
 3. 선택된 repo만 Active scope로 고정
 
 **후보 제시 순서**:
-1. Local Search 결과 (MCP `repo_candidates` 도구)
+1. Deckard 결과 (MCP `repo_candidates` 도구)
 2. skills-index.md
 3. 1depth 목록 + README 확인
 

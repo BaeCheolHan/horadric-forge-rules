@@ -8,9 +8,9 @@ Key principles:
 5. Documentation (P4)
 
 IMPORTANT - Token Efficiency:
-- Use local-search MCP tools BEFORE file exploration
+- Use deckard MCP tools BEFORE file exploration
 - Preferred: MCP search tool (if available)
-- Fallback: python3 .codex/tools/local-search/scripts/query.py search "keyword"
+- Fallback: python3 .codex/tools/deckard/scripts/query.py search "keyword"
 
 Read the rules at: .codex/rules/00-core.md
 Quick start: .codex/quick-start.md

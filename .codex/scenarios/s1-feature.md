@@ -15,7 +15,7 @@
 
 ```
 1. 사용자: 기능 요청
-2. AI: local-search로 관련 코드 검색
+2. AI: deckard로 관련 코드 검색
 3. AI: Mini Spec 작성 (목표/범위/영향)
 4. 사용자: 스펙 승인
 5. AI: 변경 수행 + 증거
@@ -28,7 +28,7 @@
 
 - [ ] 목표/제약 1~2줄로 재진술
 - [ ] 진행 의도 확인됨
-- [ ] **local-search로 먼저 검색** (MCP `search` 도구)
+- [ ] **deckard로 먼저 검색** (MCP `search` 도구)
 - [ ] lessons ≤10줄 확인
 - [ ] debt ≤20줄 확인
 - [ ] current-state ≤12줄 확인

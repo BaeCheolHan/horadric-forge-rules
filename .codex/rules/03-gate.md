@@ -93,9 +93,9 @@ S1 이상 작업 시 각 단계 완료 후 **다음 단계를 자연스럽게 �
 
 ## Run 정책 (SAFE)
 
-**허용**: git status/diff/show, rg/grep, mvn test, ./gradlew test, npm test, pytest, local-search 관련
+**허용**: git status/diff/show, rg/grep, mvn test, ./gradlew test, npm test, pytest, deckard 관련
 
-**금지**: rm, sudo, kubectl, helm, terraform, DB 접속/DDL/DML, curl/wget (local-search 예외)
+**금지**: rm, sudo, kubectl, helm, terraform, DB 접속/DDL/DML, curl/wget (deckard 예외)
 
 SAFE 외 명령은 **1회 재확인** 필수.
 
@@ -104,7 +104,7 @@ SAFE 외 명령은 **1회 재확인** 필수.
 ## Design Review 트리거
 
 아래 중 하나면 Change 전 Design Review 선행:
-- **Preflight**: local-search로 관련 lessons/API/ERD/glossary 조회
+- **Preflight**: deckard로 관련 lessons/API/ERD/glossary 조회
 - 동작 변경 (비즈니스 로직/정책)
 - 계약 변경 (API/DTO/스키마/에러코드)
 - 성능/동시성/트랜잭션 변경

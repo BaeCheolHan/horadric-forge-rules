@@ -77,16 +77,16 @@
 > repo/service 미지정 시 **Change/Read Expand 금지**
 
 - [MUST] 후보 2~3개 제시 → 사용자 선택 → Active scope 고정
-- **후보 제시 순서**: (1) local-search `/repo-candidates` (2) 1depth+README
+- **후보 제시 순서**: (1) deckard `/repo-candidates` (2) 1depth+README
 
-## Local Search 우선 원칙 (P2: 토큰 절감)
+## Deckard 우선 원칙 (P2: 토큰 절감)
 
 > [!CAUTION]
-> **local-search 미사용 시 작업 즉시 중단**. Glob/grep **사용 전 반드시** local-search 시도 증명 필요.
+> **deckard 미사용 시 작업 즉시 중단**. Glob/grep **사용 전 반드시** deckard 시도 증명 필요.
 
 > [!WARNING]
 > **회피 금지**: "파일이 어디 있는지 모르겠다", "찾을 수 없다" 등의 응답 **금지**.
-> **반드시** local-search로 검색 시도 후 결과 보고.
+> **반드시** deckard로 검색 시도 후 결과 보고.
 
 **목적**: 불필요한 파일 탐색을 방지하여 토큰 30-50% 절감
 
@@ -94,9 +94,10 @@
 
 모든 파일 탐색 작업은 아래 순서 **필수**:
 
-1. **1단계**: local-search로 검색 시도
+1. **1단계**: deckard로 검색 시도
 2. **2단계**: 결과 확인 및 보고
-3. **3단계**: 결과 0건일 때만 대안(glob/grep) 허용
+3. **3단계**: 결과 0건일 때 **키워드 최적화(Refinement)** 후 재시도 (예: "PaymentService" -> "payment service")
+4. **4단계**: 재시도 후에도 0건일 때만 대안(glob/grep) 허용
 
 **위반 예시 (금지)**:
 ```
@@ -107,27 +108,27 @@
 
 **올바른 예시 (필수)**:
 ```
-✅ AI: local-search "PaymentService" 실행
+✅ AI: deckard "PaymentService" 실행
      → 3개 파일 발견
      → payment-service/PaymentService.java 확인
 ```
 
 ### MCP 도구 사용 (v2.3.0+)
-local-search가 MCP 도구로 등록되어 있다면 (`/mcp`로 확인):
+deckard가 MCP 도구로 등록되어 있다면 (`/mcp`로 확인):
 1. **search**: 키워드로 파일/코드 검색
 2. **status**: 인덱스 상태 확인
 
-MCP 미등록 시: `python3 .codex/tools/local-search/scripts/query.py search "keyword"`
+MCP 미등록 시: `python3 .codex/tools/deckard/scripts/query.py search "keyword"`
 
 ### 필수 사용 시나리오
 
 | 상황 | [MUST] 필수 행동 | [금지] |
 |------|------------------|--------|
-| 파일 위치 모름 | local-search `search` 먼저 | Glob 전체 탐색 |
-| 키워드 검색 | local-search > grep | 추측 경로 접근 |
-| Cross-repo 탐색 | local-search로 전체 검색 | 수동 탐색 |
-| **지식 문서 조회** | local-search로 검색 (lessons/glossary/API/ERD) | 직접 경로 접근 |
-| **"어디 있는지?"** | local-search 시도 → 결과 보고 | "모르겠다" 응답 |
+| 파일 위치 모름 | deckard `search` 먼저 | Glob 전체 탐색 |
+| 키워드 검색 | deckard > grep | 추측 경로 접근 |
+| Cross-repo 탐색 | deckard로 전체 검색 | 수동 탐색 |
+| **지식 문서 조회** | deckard로 검색 (lessons/glossary/API/ERD) | 직접 경로 접근 |
+| **"어디 있는지?"** | deckard 시도 → 결과 보고 | "모르겠다" 응답 |
 
 ### 예시: Before vs After
 
@@ -140,13 +141,13 @@ AI: Glob **/*auth* → 20개 파일 읽기 → 12000 토큰
 **✅ After (토큰 절감 - 필수)**:
 ```
 User: "로그인 코드 찾아줘"
-AI: local-search "login auth" → 3개 파일 → 900 토큰 (92% 절감)
+AI: deckard "login auth" → 3개 파일 → 900 토큰 (92% 절감)
 ```
 
 **✅ 추가 예시 - Cross-repo**:
 ```
 User: "결제 관련 코드"
-AI: local-search "payment" --scope all
+AI: deckard "payment" --scope all
 → payment-service/PaymentController.java
 → order-service/OrderPayment.java
 → 2개 파일만 읽기
@@ -155,7 +156,7 @@ AI: local-search "payment" --scope all
 **✅ 추가 예시 - 지식 문서**:
 ```
 User: "API 인증 관련"
-AI: local-search "auth API" --type docs
+AI: deckard "auth API" --type docs
 → docs/_shared/api/auth-api.md 발견
 → 재탐색 방지
 ```
@@ -163,16 +164,16 @@ AI: local-search "auth API" --type docs
 **✅ 추가 예시 - 0건 시 대안**:
 ```
 User: "새 파일 NewService 어디 만들까?"
-AI: local-search "NewService" → 0건
-    local-search 결과 없으므로 유사 파일 탐색
+AI: deckard "NewService" → 0건
+    deckard 결과 없으므로 유사 파일 탐색
     → grep으로 대안 검색
 ```
 
 ### 예외 허용 (명시 필요)
 
 다음 경우만 대안 허용:
-- [✓] local-search 결과 0건 → Glob 허용 (로그: "local-search 0건, glob 시도")
-- [✓] local-search 서버 미응답 → grep 허용 (로그: "local-search 서버 오류, grep 시도")
+- [✓] deckard 결과 0건 -> **키워드 최적화 재시도** -> 최종 0건 시 Glob 허용 (로그: "deckard 최적화 후에도 0건, glob 시도")
+- [✓] deckard 서버 미응답 → grep 허용 (로그: "deckard 서버 오류, grep 시도")
 
 **예외 사용 시 반드시 로그 남기기**
 

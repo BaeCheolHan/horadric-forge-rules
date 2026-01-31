@@ -15,7 +15,7 @@
 
 ```
 1. 사용자: "OOO 버그 고쳐줘" (진행 의도 포함)
-2. AI: local-search로 관련 파일 검색 (토큰 절감!)
+2. AI: deckard로 관련 파일 검색 (토큰 절감!)
 3. AI: 검색 결과 기반 파일 탐색 (≤10 files 읽기)
 4. AI: 변경 제안 + 영향 범위 설명
 5. 사용자: "진행해" / "적용해"
@@ -29,7 +29,7 @@
 
 - [ ] 목표/제약 1~2줄로 재진술
 - [ ] 진행 의도 확인됨
-- [ ] **local-search로 먼저 검색** (MCP `search` 도구)
+- [ ] **deckard로 먼저 검색** (MCP `search` 도구)
 - [ ] current-state.md 확인 (≤6줄)
 
 ---
@@ -49,7 +49,7 @@
 
 **AI 응답**:
 ```
-1. local-search "PaymentService null" → 3개 파일 발견
+1. deckard "PaymentService null" → 3개 파일 발견
 
 변경 대상:
 - PaymentService.java (null 체크 추가)

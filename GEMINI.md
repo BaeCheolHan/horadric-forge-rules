@@ -28,7 +28,7 @@
 | `/mcp` | MCP 서버 상태 확인 |
 | `/help` | 도움말 |
 
-## Local Search 사용법
+## Deckard 사용법
 
 ### MCP 도구 (권장)
 Gemini CLI가 자동으로 deckard MCP 도구를 로드합니다.

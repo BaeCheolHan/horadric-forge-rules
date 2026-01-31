@@ -15,7 +15,7 @@
 
 ```
 1. 사용자: Cross-repo 요청
-2. AI: local-search로 전체 검색 (MCP `repo_candidates`)
+2. AI: deckard로 전체 검색 (MCP `repo_candidates`)
 3. AI: 후보 repo 2~3개 제시
 4. 사용자: repo 선택
 5. AI: Mini Spec + 롤백 계획 작성
@@ -30,7 +30,7 @@
 
 - [ ] 목표/제약 1~2줄로 재진술
 - [ ] 진행 의도 확인됨
-- [ ] **local-search `repo_candidates`로 후보 탐색**
+- [ ] **deckard `repo_candidates`로 후보 탐색**
 - [ ] repo 선택 완료 (Active scope 고정)
 - [ ] lessons/debt/state 확인
 - [ ] 롤백 계획 작성
