@@ -1,13 +1,12 @@
 # Codex Rules v2.5.0 (Gemini CLI)
 
-> Gemini CLI용 진입점. **Gemini 강화 룰셋** 사용.
->
-> **v2.5.0 변경**: 버전 정합성 통일
+Gemini CLI용 진입점. **Gemini 강화 룰셋** 사용.
+**v2.5.0 변경**: 버전 정합성 통일
 
 ## Rules
 
-> [!NOTE]
-> Gemini CLI는 규칙 준수 강화를 위해 `.gemini/rules/` 전용 룰셋 사용
+NOTE:
+Gemini CLI는 규칙 준수 강화를 위해 `.gemini/rules/` 전용 룰셋 사용
 
 아래 규칙들이 자동으로 로드됩니다:
 
