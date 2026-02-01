@@ -19,7 +19,7 @@ Preflight 체크 누락 시 작업 시작 금지
 
 - [ ] [MUST] **Intent 고정**: 목표/제약/금지를 1~2줄로 재진술
 - [ ] [MUST] **진행 의도 확인**: 변경 의사 + 타겟 repo 지정 (`03-gate.md` 3단계 게이트 참조)
-- [ ] [MUST] **최종 승인**: 스케일 고지 + 사용자 "approve execute" (또는 명시적 승인) 확인
+- [ ] [MUST] **최종 승인**: 스케일 고지 + 사용자 명시적 승인(자연어 가능) 확인
 - [ ] [MUST] **Deckard 우선**: 파일 탐색 전 deckard 먼저 (토큰 절감)
 - [ ] [IF] **위험 행동 재확인**: 파괴/외부/대규모면 1회 재확인 완료
 - [ ] [IF] **Knowledge 확인**:
@@ -30,7 +30,7 @@ Preflight 체크 누락 시 작업 시작 금지
 **Preflight 체크 예시**:
 ```
 ✓ Intent: PaymentService null 체크 추가, 3 files 이내
-✓ 진행 의도: "approve execute" 확인
+✓ 진행 의도: 명시적 승인 확인 ("approve execute" 또는 "진행해")
 ✓ 최종 승인: S0 (3 files) 승인됨
 ✓ Deckard: deckard "PaymentService" → 3개 파일
 ✓ Knowledge: current-state 6줄 읽음
